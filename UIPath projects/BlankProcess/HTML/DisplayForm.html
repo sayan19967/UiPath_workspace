@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+      <title>UiPath</title>
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/jquery-ui.min.css">
+      <link rel="stylesheet" href="css/style.css">
+   </head>
+   <body style="">
+      <div id="wrap">
+         <header id="header" class="header header-stick" style="background-color: rgb(255, 255, 255);">
+            <div class="container">
+               <div class="logo float-left" style="opacity: 1; visibility: visible;"><a href="DisplayForm.html" title=""><img src="logo.svg" alt=""></a></div>
+               <div class="bars" id="bars" style="display: none;"></div>
+            </div>
+         </header>
+         <div class="main">
+            <div class="container">
+               <div class="main-cn bg-white clearfix">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <section class="list-f">
+                           <div class="f-statistics">
+                              <div class="row">
+                                 <div class="col-sm-12 text-center f-statistics-item">
+                                    <h5>Enter Employee Details</h5>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="list-f-cn">
+                              <div class="container" id="FormDivClass" style="overflow: hidden; outline: none;" tabindex="5000">
+                                 <div class="form-group"><label for="employeeid">Employee ID</label><div class="row"><div class="col-md-12"><input id ="employeeid" class="form-control" type="text" placeholder ="Type in employee id"></div></div></div>
+
+
+<div class="form-group"><label for="employeename">Employee Name</label><div class="row"><div class="col-md-12"><input id ="employeename" class="form-control" type="text" placeholder ="Type in employee name"></div></div></div>
+
+
+<div class="form-group"><label for="billingrate">Billing Rate</label><div class="row"><div class="col-md-12"><input id ="billingrate" class="form-control" type="text" placeholder ="Type in billing rate"></div></div></div>
+
+
+
+                                 <div class="form-group">
+                                    <div class="row" id="editExcelAllRow">
+                                       <div class="col-12"><button onclick="Submit();" type="button" id="SubmitForm" class="btn btn-primary btn-md form-control">Submit</button></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </section>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script type="text/javascript" src="js/jquery.min.js"></script>
+      <script type="text/javascript" src="js/bootstrap.min.js"></script>
+      <script type="text/javascript">
+         var divNode = document.getElementById("FormDivClass");
+         var inputNodes = divNode.getElementsByTagName('INPUT');
+         var InputString = "";
+
+          function Submit(){
+
+            for(var i = 0; i < inputNodes.length; ++i)
+            {
+                InputString = InputString + inputNodes[i].value + "#!@!#";
+            }
+            window.external.Submit(InputString.substring(0, InputString.length - 5));
+            return true;
+          }
+
+      </script>
+   </body>
+</html>

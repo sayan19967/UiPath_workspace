@@ -1,0 +1,154 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Sequence1" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="546,2619" sap2010:WorkflowViewState.IdRef="Sequence1_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:uca="clr-namespace:UiPathTeam.CustomInputDialog.Activities;assembly=UiPathTeam.CustomInputForm.Activities" xmlns:uda="clr-namespace:UiPathTeam.Dates.Activities;assembly=UiPathTeam.Dates.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:unaa="clr-namespace:UiPathTeam.NextWorkingDay.Activities.Activities;assembly=UiPathTeam.NextWorkingDay.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="21">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="32">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Sequence1" sap:VirtualizedContainerService.HintSize="526,2519" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="empDetailsTable" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="empID" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="empName" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="billingRate" />
+      <Variable x:TypeArguments="s:DateTime" Name="nextWorkingDay" />
+      <Variable x:TypeArguments="s:DateTime" Name="firstWorkingDate" />
+      <Variable x:TypeArguments="s:DateTime" Name="lastWorkingDate" />
+      <Variable x:TypeArguments="sd:DataTable" Name="timeCardTable" />
+      <Variable x:TypeArguments="x:Int32" Default="9" Name="workingHours" />
+      <Variable x:TypeArguments="x:String" Name="timeCardTableString" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <uca:CustomInputDialog DisplayName="Custom input dialog" DisplayType="HTMLInputForm" sap:VirtualizedContainerService.HintSize="484,116" sap2010:WorkflowViewState.IdRef="CustomInputDialog_1" Output="[empDetailsTable]" Title="Enter Employee Details">
+      <uca:CustomInputDialog.InputLabels>
+        <scg:List x:TypeArguments="uca:RowItems" Capacity="4">
+          <uca:RowItems FieldName="Employee ID" FieldRequired="False" FieldType="" />
+          <uca:RowItems FieldName="Employee Name" FieldRequired="False" FieldType="" />
+          <uca:RowItems FieldName="Billing Rate" FieldRequired="False" FieldType="" />
+          <uca:RowItems FieldName="{}{&quot;jan&quot;,&quot;feb&quot;}" FieldRequired="False" FieldType="" />
+        </scg:List>
+      </uca:CustomInputDialog.InputLabels>
+    </uca:CustomInputDialog>
+    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[empDetailsTable]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="484,512" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,364" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Employee ID" DisplayName="Get Row Item" sap:VirtualizedContainerService.HintSize="334,64" sap2010:WorkflowViewState.IdRef="GetRowItem_1" Row="[row]">
+              <ui:GetRowItem.Value>
+                <OutArgument x:TypeArguments="ui:GenericValue">[empID]</OutArgument>
+              </ui:GetRowItem.Value>
+            </ui:GetRowItem>
+            <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Employee Name" DisplayName="Get Row Item" sap:VirtualizedContainerService.HintSize="334,64" sap2010:WorkflowViewState.IdRef="GetRowItem_2" Row="[row]">
+              <ui:GetRowItem.Value>
+                <OutArgument x:TypeArguments="ui:GenericValue">[empName]</OutArgument>
+              </ui:GetRowItem.Value>
+            </ui:GetRowItem>
+            <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Billing Rate" DisplayName="Get Row Item" sap:VirtualizedContainerService.HintSize="334,64" sap2010:WorkflowViewState.IdRef="GetRowItem_3" Row="[row]">
+              <ui:GetRowItem.Value>
+                <OutArgument x:TypeArguments="ui:GenericValue">[billingRate]</OutArgument>
+              </ui:GetRowItem.Value>
+            </ui:GetRowItem>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+    </ui:ForEachRow>
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="484,61" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[empID + &quot; &quot; + empName + &quot; &quot; + billingRate]" />
+    <uda:GetFirstOrLastBusinessDayOfMonth BusinessDayOfMonthString="{x:Null}" BusinessDayOfMonth="[firstWorkingDate]" DateFormat="dd:M:yyyy" DisplayName="Get first or last business day of month" sap:VirtualizedContainerService.HintSize="484,89" sap2010:WorkflowViewState.IdRef="GetFirstOrLastBusinessDayOfMonth_1" Month="November" Position="First" Year="2019" />
+    <uda:GetFirstOrLastBusinessDayOfMonth BusinessDayOfMonthString="{x:Null}" BusinessDayOfMonth="[lastWorkingDate]" DateFormat="dd:M:yyyy" DisplayName="Get first or last business day of month" sap:VirtualizedContainerService.HintSize="484,89" sap2010:WorkflowViewState.IdRef="GetFirstOrLastBusinessDayOfMonth_2" Month="November" Position="Last" Year="2019" />
+    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="484,61" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[firstWorkingDate.ToString + &quot; &quot; + lastWorkingDate.ToString]" />
+    <ui:BuildDataTable DataTable="[timeCardTable]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="484,59" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Working_x0020_Dates&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Working_x0020_Hours&quot; type=&quot;xs:int&quot; default=&quot;9&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;Working_x0020_Hours&gt;9&lt;/Working_x0020_Hours&gt;&#xA;  &lt;/TableName&gt;&#xA;&lt;/NewDataSet&gt;" />
+    <DoWhile DisplayName="Do While" sap:VirtualizedContainerService.HintSize="484,539" sap2010:WorkflowViewState.IdRef="DoWhile_1" Condition="[firstWorkingDate &lt;= lastWorkingDate]">
+      <Sequence sap:VirtualizedContainerService.HintSize="304,377" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="262,61" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[firstWorkingDate.ToString]" />
+        <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{firstWorkingDate.ToString,workingHours}]" DataTable="[timeCardTable]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+        <unaa:GetNextWorkingDay CountryCode="AD" DisplayName="Get Next Working Day" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="GetNextWorkingDay_1" NextWorkingDay="[nextWorkingDay]" ReferenceDate="[firstWorkingDate]" />
+        <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+          <Assign.To>
+            <OutArgument x:TypeArguments="s:DateTime">[firstWorkingDate]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="s:DateTime">[nextWorkingDay]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+    </DoWhile>
+    <ui:OutputDataTable DataTable="[timeCardTable]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="484,22" sap2010:WorkflowViewState.IdRef="OutputDataTable_1" Text="[timeCardTableString]" />
+    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="484,59" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[timeCardTableString]" TopMost="True" />
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="484,420" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="[&quot;C:\Users\Sayan\Desktop\&quot; + empID + &quot;_TimeCard.xlsx&quot;]">
+      <ui:ExcelApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,311" sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:ExcelWriteRange AddHeaders="False" DataTable="[timeCardTable]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_1" SheetName="Sheet1" StartingCell="A1" />
+            <ui:InputDialog Result="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="334,92" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="lllllllllllllll" Options="[{&quot;jan&quot;,&quot;feb&quot;}]" Title="kkkkkkkkkkk" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ExcelApplicationScope.Body>
+    </ui:ExcelApplicationScope>
+  </Sequence>
+</Activity>
